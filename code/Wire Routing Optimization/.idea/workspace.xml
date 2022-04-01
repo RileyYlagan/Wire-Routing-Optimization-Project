@@ -20,7 +20,7 @@
   </component>
   <component name="ProjectId" id="26wEq5284OrV6szu3X2jPGcu8tS" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -28,7 +28,15 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization" />
       <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\obj" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing\domain" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\tests" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\sample" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing\domain" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -119,7 +127,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/obj/wire.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\obj\wire.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -154,7 +162,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/input processing/input acceptance.py</url>
-          <line>5</line>
+          <line>6</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

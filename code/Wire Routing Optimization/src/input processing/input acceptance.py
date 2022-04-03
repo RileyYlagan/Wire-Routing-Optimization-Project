@@ -32,10 +32,11 @@ class WireSystem:
         
         
 #Implement Function Calls for Instance A
-a = WireSystem('Wire Data Input.csv')
+a = WireSystem(r"C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes & hw\Senior Design\Wire Routing Optimization\src\input processing\Wire Data Input.csv")
 
 #Read & Massage Data for Futher Analysis
-a.readData()
-a.massageData()
+#a.readData()
+#a.massageData()
 #Print out the wire information
-a.wireInfo(2)
+
+print(a.wireInfo(2))

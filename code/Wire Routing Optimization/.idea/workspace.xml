@@ -15,10 +15,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="MacroExpansionManager">
     <option name="directoryName" value="LbwVrvYY" />
   </component>
   <component name="ProjectId" id="26wEq5284OrV6szu3X2jPGcu8tS" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
     <property name="project.structure.last.edited" value="Project" />
@@ -27,15 +31,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\tests" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\sample" />
+      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing\domain" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization" />
       <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing" />
       <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\obj" />
-      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing\domain" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\tests" />
-      <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\sample" />
       <recent name="C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes &amp; hw\Senior Design\Wire Routing Optimization\src\input processing\domain" />
     </key>
   </component>
@@ -51,7 +55,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.input acceptance">
+  <component name="RunManager" selected="Python.algorithm">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="Wire Routing Optimization" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,6 +69,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/obj/point.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="algorithm" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="src" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\tarin\Documents\anaconda\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/pathfinding/algorithm.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -138,6 +163,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.algorithm" />
         <item itemvalue="Python.input acceptance" />
         <item itemvalue="Python.point" />
         <item itemvalue="Python.wire" />
@@ -162,7 +188,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/input processing/input acceptance.py</url>
-          <line>6</line>
+          <line>1</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

@@ -156,3 +156,48 @@ def ray_triangle_intersection(ray_start, ray_vec, triangle):
 
     return True
 
+# Get available neighbors of a given point
+def get_available_neighbors(current_node,valid_points,grid_points):
+    x = np.unique(grid_points[:,0])
+    y = np.unique(grid_points[:,1])
+    z = np.unique(grid_points[:,2])
+    index_x = int(np.where(x == current_node[0])[0])
+    index_y = int(np.where(y == current_node[1])[0])
+    index_z = int(np.where(z == current_node[2])[0])
+    # Get possible neighbors 
+    possible_neighbors = []
+    # holding xy
+    if index_z+1 <= len(z) - 1:
+        possible_neighbors.append([x[index_x],y[index_y],z[index_z+1]])
+    if index_z-1 >= 0:
+        possible_neighbors.append([x[index_x],y[index_y],z[index_z-1]])
+    # holding xz
+    if index_y+1 <= len(y) - 1:
+        possible_neighbors.append([x[index_x],y[index_y+1],z[index_z]])
+    if index_y-1 >= 0:
+        possible_neighbors.append([x[index_x],y[index_y-1],z[index_z]])
+    # holding yz
+    if index_x+1 <= len(x) - 1:
+        possible_neighbors.append([x[index_x+1],y[index_y],z[index_z]])
+    if index_x-1 >= 0:
+        possible_neighbors.append([x[index_x-1],y[index_y],z[index_z]])
+
+    # Check if each possible node exists in the valid points list:
+    # Have to coerce P from array to list
+    p_list=valid_points.tolist()
+    valid_neighbors = []
+    # If possible neighbor is in Plist, then add it to valid_neighbors
+    for i in range(len(possible_neighbors)):
+        if possible_neighbors[i] in p_list:
+            valid_neighbors.append(possible_neighbors[i])
+    return valid_neighbors
+
+def all_node_neighbors(outside_points,grid_points):
+    # Gets the available neighbor nodes of each valid points and stores it into a dictionary
+    node_dictionary = {}
+    for i in range(len(outside_points)):
+        current_node = outside_points[i]
+        avail_nodes = get_available_neighbors(current_node,outside_points,grid_points)
+        node = {"node": current_node.tolist(), "neighbors": avail_nodes}
+        node_dictionary[i] = node
+    return node_dictionary

@@ -8,6 +8,7 @@ import numpy as np
 import heapq
 import pandas as pd
 from collections import OrderedDict
+import json
 
 ##############################################################################
 
@@ -16,17 +17,8 @@ from collections import OrderedDict
 ##############################################################################
 
 
-x1 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
-y1 = [1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3]
-z1 = [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
-x2 = [1,1,2,1,2,2,1,1,1,2,2,1,1,2,2,2,1,1,2,1,2,2,1,1,2,3,3,1,1,2,3,3,1,1,1,2,2,3,3,3,1,1,1,2,2,3,3,3,1,1,2,3,3,1,1,2,3,3,2,3,3,2,2,3,2,2,3,3,3,2,2,2,3,3,2,3,3,2,2,3,1,1,2,2,1,1,2,2,1,2,1,1,1,2,2,2,1,1,1,2,2,2,1,1,2,2,1,1,2,2,1,1,2,2,1,2,1,1,2,2,3,3,1,1,2,2,3,3,1,1,3,3,1,1,2,2,3,3,1,1,2,2,3,3,1,1,3,3,2,2,3,3,2,2,3,3,2,3,2,2,2,3,3,3,2,2,2,3,3,3,2,2,3,3,2,2,3,3,2,2,3,3,2,3,1,1,2,1,2,2,1,1,1,2,2,1,1,2,2,2,1,1,2,1,2,2,1,1,2,3,3,1,1,2,3,3,1,1,1,2,2,3,3,3,1,1,1,2,2,3,3,3,1,1,2,3,3,1,1,2,3,3,2,3,3,2,2,3,2,2,3,3,3,2,2,2,3,3,2,3,3,2,2,3]
-y2 = [1,2,1,2,1,2,1,2,3,1,3,1,3,1,2,3,2,3,3,2,2,3,1,2,1,1,2,1,2,2,1,2,1,2,3,1,3,1,2,3,1,2,3,1,3,1,2,3,2,3,3,2,3,2,3,2,2,3,1,1,2,1,2,2,1,3,1,2,3,1,2,3,1,3,3,2,3,2,3,2,1,2,1,2,1,2,1,2,2,1,1,2,3,1,2,3,1,2,3,1,2,3,1,3,1,3,2,3,2,3,2,3,2,3,2,3,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,2,3,2,3,2,3,2,3,2,3,2,3,2,3,2,3,1,2,1,2,1,2,1,2,1,2,1,2,3,1,2,3,1,2,3,1,2,3,1,3,1,3,2,3,2,3,2,3,2,3,3,2,1,2,1,2,1,2,1,2,3,1,3,1,3,1,2,3,2,3,3,2,2,3,1,2,1,1,2,1,2,2,1,2,1,2,3,1,3,1,2,3,1,2,3,1,3,1,2,3,2,3,3,2,3,2,3,2,2,3,1,1,2,1,2,2,1,3,1,2,3,1,2,3,1,3,3,2,3,2,3,2]
-z2 = [2,2,2,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1,2,2,2,2,2,1,1,1,1,1,2,2,2,1,1,1,3,3,3,3,1,1,1,1,2,2,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,3,3,3,3,1,1,1,1,2,2,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,3,3,3,3,1,1,1,1,2,2,3,3,3,3,3,3,1,1,1,1,1,1,2,2,2,2,3,3,3,3,1,1,1,1,2,2,2,2,2,3,3,3,2,2,2,2,2,3,3,3,3,3,2,2,2,3,3,3,2,2,2,2,2,3,3,3,3,3,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,2,2,2,2,2,3,3,3,3,3,2,2,2,3,3,3,2,2,2,2,2,3,3,3,3,3,2,2,2,3,3,3]
-
-coord_pairs = pd.DataFrame( OrderedDict((('x1', pd.Series(x1)), ('y1', pd.Series(y1)), ('z1', pd.Series(z1)), ('x2', pd.Series(x2)), ('y2', pd.Series(y2)), ('z2', pd.Series(z2)))))
-coord_pairs = coord_pairs.sort_values(['x1', 'y1', 'z1'])#, ascending=[True,True])
-print(coord_pairs)
-
+with open(r"C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes & hw\Senior Design\project\src\pathfinding\test_dictionary_for_SF5.txt") as json_file:
+    node_dict = json.load(json_file)
 
 ##############################################################################
 
@@ -34,8 +26,12 @@ print(coord_pairs)
 
 ##############################################################################
 
-start = (1,1,1)
-goal = (3,3,3)
+start = tuple(node_dict['11']['node']) #(1,1,1)
+goal = tuple(node_dict['89']['node']) #(3,3,3)
+print('start:')
+print(start)
+print('end:')
+print(goal)
 
 ##############################################################################
 
@@ -43,14 +39,14 @@ goal = (3,3,3)
 
 ##############################################################################
 
-
-def available_neighbours(current_x,current_y,current_z):
-    return list(zip(coord_pairs.loc[(coord_pairs.x1 == current_x) & (coord_pairs.y1 == current_y) & (coord_pairs.z1 == current_z)][["x2"]].x2,
-                coord_pairs.loc[(coord_pairs.x1 == current_x) & (coord_pairs.y1 == current_y) & (coord_pairs.z1 == current_z)][["y2"]].y2,
-                coord_pairs.loc[(coord_pairs.x1 == current_x) & (coord_pairs.y1 == current_y) & (coord_pairs.z1 == current_z)][["z2"]].z2))
-
 def heuristic(current, destination):
     return np.sqrt((destination[0] - current[0]) ** 2 + (destination[1] - current[1]) ** 2 + (destination[2] - current[2]) ** 2)
+
+def find_index_in_mesh(node_dict, current_node):
+    values = list(node_dict.values())
+    nodes = [x["node"] for x in values if x]
+    mesh_index = nodes.index(current_node)
+    return mesh_index
 
 def astar(start, goal):
     close_set = set() # closed list
@@ -58,15 +54,18 @@ def astar(start, goal):
     gscore = {start:0} # g-score dict
     fscore = {start:heuristic(start, goal)} #f score dict
     oheap = [] #open list
-
+    #print('fscore:')
+    #print(fscore)
     heapq.heappush(oheap, (fscore[start], start)) # put start node into open list
-
+    #print(oheap)
     #iter = 0
     while oheap:
         #iter += 1
         #print(iter)
         current = heapq.heappop(oheap)[1]
-        neighbours = available_neighbours(current[0],current[1],current[2])
+        current_node = [current[0],current[1],current[2]]
+        i = find_index_in_mesh(node_dict, current_node)
+        neighbours = node_dict[str(i)]['neighbors'] #available_neighbours(current[0],current[1],current[2])
 
         if current == goal:
             data = []
@@ -96,14 +95,16 @@ def astar(start, goal):
 
 ##############################################################################
 
-
-
 route = astar(start, goal)
 route = route + [start]
 route = route[::-1]
+print('route:')
 print(route)
 
-
+a_file = open("test_astar.xyz","w")
+for row in route:
+    np.savetxt(a_file, [row])
+a_file.close()
 
 ##############################################################################
 
@@ -138,38 +139,3 @@ y_coords = np.array(y_coords)
 z_coords = np.array(z_coords)
 
 
-fig = plt.figure(figsize=(12,12))
-ax = fig.add_subplot(111, projection='3d')
-ax.scatter3D(goal[0],goal[1],goal[2], marker = "*", color = "red", s = 100)
-
-
-ax.scatter3D(1,1,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,2,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,3,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,1,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,2,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,3,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,1,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,2,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,3,1,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,1,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,2,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,3,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,1,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,2,2,marker = "x", color = "black", s = 100)
-ax.scatter3D(2,3,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,1,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,2,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,3,2,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,1,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,2,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(1,3,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,1,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,2,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(2,3,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,1,3,marker = "o", color = "black", s = 100)
-ax.scatter3D(3,2,3,marker = "o", color = "black", s = 100)
-#ax.scatter3D(3,3,3,marker = "o", color = "black", s = 100)
-
-ax.plot3D(x_coords, y_coords, z_coords, color = "pink")
-plt.show()

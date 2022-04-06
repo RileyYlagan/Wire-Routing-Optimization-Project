@@ -8,6 +8,9 @@ from stl import mesh, main
 # Need to return vector of all validated points
 
 # Initial mesh processing, receive triangle and bounding box data.
+def test():
+    print("hello riley")
+
 def find_mins_maxs(obj): # Find bottom left and top right coordinates of the bounding box
     # obj is a mesh object
     minx = obj.x.min()
@@ -45,7 +48,7 @@ def write_points_to_file(file,points):
         np.savetxt(a_file, [row])
     a_file.close()
 
-def construct_valid_points(triangles,points):
+def find_valid_points(triangles,points):
     # triangles = mesh.vectors
     # points = grid.points
     valid_points = np.zeros((len(points))) # will be vector of true/false. Points inside the mesh are true/ outside are false.

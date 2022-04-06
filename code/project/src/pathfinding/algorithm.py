@@ -7,7 +7,6 @@
 import numpy as np
 import heapq
 import pandas as pd
-import os
 from collections import OrderedDict
 import json
 
@@ -17,7 +16,6 @@ import json
 
 ##############################################################################
 
-print('current:'+ os.getcwd())
 with open('test_dictionary_for_SF5.json', 'r') as read_file:
     node_dict = json.load(read_file)
 

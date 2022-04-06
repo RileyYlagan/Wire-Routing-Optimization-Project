@@ -7,6 +7,7 @@
 import numpy as np
 import heapq
 import pandas as pd
+import os
 from collections import OrderedDict
 import json
 
@@ -16,9 +17,9 @@ import json
 
 ##############################################################################
 
-
-with open(r"C:\Users\tarin\OneDrive - The University of Texas at Austin\UT course notes & hw\Senior Design\project\src\pathfinding\test_dictionary_for_SF5.txt") as json_file:
-    node_dict = json.load(json_file)
+print('current:'+ os.getcwd())
+with open('test_dictionary_for_SF5.json', 'r') as read_file:
+    node_dict = json.load(read_file)
 
 ##############################################################################
 

@@ -1,3 +1,5 @@
+#RAISES ERRORS FOR NON-FLOAT INPUTS AS COORDINATES
+
 import unittest
 from perpendicular_distances import per_dist
 

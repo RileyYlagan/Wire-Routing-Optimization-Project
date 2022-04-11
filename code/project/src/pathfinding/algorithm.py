@@ -9,6 +9,8 @@ import heapq
 import pandas as pd
 from collections import OrderedDict
 import json
+import sys
+import pyvista as pv
 
 ##############################################################################
 
@@ -16,27 +18,29 @@ import json
 
 ##############################################################################
 
-with open('test_dictionary_for_SF5.json', 'r') as read_file:
-    node_dict = json.load(read_file)
+#with open('test_dictionary_for_SF2.txt', 'r') as read_file:
+ #   node_dict = json.load(read_file)
 
 ##############################################################################
 
 # specify start and goal positions
 
 ##############################################################################
-
-start = tuple(node_dict['11']['node']) #(1,1,1)
-goal = tuple(node_dict['89']['node']) #(3,3,3)
-print('start:')
-print(start)
-print('end:')
-print(goal)
+# Hard Coded for testing purposes for now
+def start_and_end(node_dict,p1,p2):
+    # Hard code nodes for sake of testing
+    start = tuple(node_dict[p1]['node']) # first node
+    goal = tuple(node_dict[p2]['node']) # last node
+    return start, goal
 
 ##############################################################################
 
 # a* path finding functions
 
 ##############################################################################
+
+def test():
+    print("Hello, Riley")
 
 def heuristic(current, destination):
     return np.sqrt((destination[0] - current[0]) ** 2 + (destination[1] - current[1]) ** 2 + (destination[2] - current[2]) ** 2)
@@ -47,7 +51,7 @@ def find_index_in_mesh(node_dict, current_node):
     mesh_index = nodes.index(current_node)
     return mesh_index
 
-def astar(start, goal):
+def astar(start, goal,node_dict):
     close_set = set() # closed list
     came_from = {} # parent node dict
     gscore = {start:0} # g-score dict
@@ -64,7 +68,7 @@ def astar(start, goal):
         current = heapq.heappop(oheap)[1]
         current_node = [current[0],current[1],current[2]]
         i = find_index_in_mesh(node_dict, current_node)
-        neighbours = node_dict[str(i)]['neighbors'] #available_neighbours(current[0],current[1],current[2])
+        neighbours = node_dict[i]['neighbors'] #available_neighbours(current[0],current[1],current[2])
 
         if current == goal:
             data = []
@@ -94,16 +98,18 @@ def astar(start, goal):
 
 ##############################################################################
 
-route = astar(start, goal)
-route = route + [start]
-route = route[::-1]
-print('route:')
-print(route)
+# Functionize this
+def get_route(start,goal,node_dict):
+    route = astar(start, goal,node_dict)
+    route = route + [start]
+    route = route[::-1]
 
-a_file = open("test_astar.xyz","w")
-for row in route:
-    np.savetxt(a_file, [row])
-a_file.close()
+    # Writes to file
+    #a_file = open("test_astar.xyz","w")
+    #for row in route:
+    #    np.savetxt(a_file, [row])
+    #a_file.close()
+    return route
 
 ##############################################################################
 
@@ -111,30 +117,72 @@ a_file.close()
 
 ##############################################################################
 
+def save_path_to_STL(route,filename):
+    #extract x and y coordinates from route list
+    x_coords = []
+    y_coords = []
+    z_coords = []
 
 
-import matplotlib as mpl
-from mpl_toolkits.mplot3d import Axes3D
-import matplotlib.pyplot as plt
+    for i in (range(0,len(route))):
+        x = route[i][0]
+        y = route[i][1]
+        z = route[i][2]
+
+        x_coords.append(x)
+        y_coords.append(y)
+        z_coords.append(z)
+
+    x_coords = np.array(x_coords)
+    y_coords = np.array(y_coords)
+    z_coords = np.array(z_coords)
+    # Plot path as STL
+    points = np.column_stack((x_coords, y_coords, z_coords))
+
+    spline = pv.Spline(points, 500).tube(radius=0.1)
+    file = filename+".stl"
+    spline.save(file)
+
+def get_spline(route):
+    #extract x and y coordinates from route list
+    x_coords = []
+    y_coords = []
+    z_coords = []
 
 
-#extract x and y coordinates from route list
-x_coords = []
-y_coords = []
-z_coords = []
+    for i in (range(0,len(route))):
+        x = route[i][0]
+        y = route[i][1]
+        z = route[i][2]
 
+        x_coords.append(x)
+        y_coords.append(y)
+        z_coords.append(z)
 
-for i in (range(0,len(route))):
-    x = route[i][0]
-    y = route[i][1]
-    z = route[i][2]
+    x_coords = np.array(x_coords)
+    y_coords = np.array(y_coords)
+    z_coords = np.array(z_coords)
+    # Plot path as STL
+    points = np.column_stack((x_coords, y_coords, z_coords))
 
-    x_coords.append(x)
-    y_coords.append(y)
-    z_coords.append(z)
+    spline = pv.Spline(points, 500).tube(radius=0.1)
+    return spline
 
-x_coords = np.array(x_coords)
-y_coords = np.array(y_coords)
-z_coords = np.array(z_coords)
+def save_path_to_STL_poly(route,filename):
+    poly = pv.PolyData()
+    poly.points = route
+    the_cell = np.arange(0, len(route), dtype=np.int_)
+    the_cell = np.insert(the_cell, 0, len(route))
+    poly.lines = the_cell
+    poly["scalars"] = np.arange(poly.n_points)
+    tube = poly.tube(radius=0.1)
+    file = filename+".stl"
+    tube.save(file)
 
-
+def combine_route_and_mesh(meshes,filename):
+    # Here meshes is an array of the original input mesh and all of the wire meshes
+    merged = pv.PolyData()
+    for mesh in meshes:
+        merged += mesh
+    file = filename+".stl"
+    merged.save(file)

@@ -20,6 +20,7 @@ df2 = pd.read_excel(xls, 'Adjacency Matrix')
 
 #Implementation of Class Structuring with xls Structuring
 
+
 class wireClass:
     def __init__(self,data,txtFile):
         self.xls = pd.ExcelFile(data)
@@ -45,7 +46,7 @@ class wireClass:
         close_set = set() # closed list
         came_from = {} # parent node dict
         gscore = {start:0} # g-score dict
-        fscore = {start:heuristic(start, goal)} #f score dict
+        fscore = {start:self.heuristic(start, goal)} #f score dict
         oheap = [] #open list
         #print('fscore:')
         #print(fscore)
@@ -57,7 +58,7 @@ class wireClass:
             #print(iter)
             current = heapq.heappop(oheap)[1]
             current_node = [current[0],current[1],current[2]]
-            i = find_index_in_mesh(node_dict, current_node)
+            i = self.find_index_in_mesh(node_dict, current_node)
             neighbours = node_dict[str(i)]['neighbors'] #available_neighbours(current[0],current[1],current[2])
 
             if current == goal:
@@ -69,7 +70,7 @@ class wireClass:
             close_set.add(current)
             for x, y, z in neighbours:
                 neighbour = x, y, z
-                tentative_g_score = gscore[current] + heuristic(current, neighbour)
+                tentative_g_score = gscore[current] + self.heuristic(current, neighbour)
 
                 if neighbour in close_set and tentative_g_score >= gscore.get(neighbour, 0):
                     continue
@@ -77,7 +78,7 @@ class wireClass:
                 if tentative_g_score < gscore.get(neighbour, 0) or neighbour not in [i[1]for i in oheap]:
                     came_from[neighbour] = current
                     gscore[neighbour] = tentative_g_score
-                    fscore[neighbour] = tentative_g_score + heuristic(neighbour, goal)
+                    fscore[neighbour] = tentative_g_score + self.heuristic(neighbour, goal)
                     heapq.heappush(oheap, (fscore[neighbour], neighbour))
 
         return False
@@ -88,13 +89,13 @@ class wireClass:
             tupleStart = ast.literal_eval(self.df1['Start Point'][i])
             tupleEnd = ast.literal_eval(self.df1['End Point'][i])
             #call the astar function
-            route = astar(tupleStart, tupleEnd)
+            route = self.astar(tupleStart, tupleEnd)
             route = route + [tupleStart]
             route = route[::-1]
             #print the route with its associated wire number
             print('Optimized Route Wire: '+ str(self.df1['Wire Number'][i]))
             print(route)
-        
+            #STORE AS DICTIONARY key: wire number  value: a* route !!!        
               
 
         

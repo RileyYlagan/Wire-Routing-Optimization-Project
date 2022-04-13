@@ -2,7 +2,7 @@
 
 import unittest
 
-from ______ import _____
+from src.input_processing import WireDataInput
 
 class TestDomainDiscret(unittest.TestCase):
     def test_per_dist(self):
@@ -11,12 +11,11 @@ class TestDomainDiscret(unittest.TestCase):
         self.assertRaises(TypeError, _____, 1)
         self.assertRaises(TypeError, _____, aanaa.csv)
         self.assertRaises(TypeError, _____, aanaa.docx)
-        self.assertRaises(TypeError, _____, aanaa.xlsx)
         self.assertRaises(TypeError, _____, aanaa.txt)
         
 if __name__--'__main__':
     unittest.main()
     
 #Think about
-# [OUTPUT FILE NAME].lower().endswith('.csv')
+# [OUTPUT FILE NAME].lower().endswith(('.csv', '.xlsx'))
 # if statement

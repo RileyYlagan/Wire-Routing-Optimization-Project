@@ -1,8 +1,7 @@
 #BASIC CODE FOR CHECKING IF A .STL FILE IS ACTUALLY A .STL FILE
 
 import unittest
-
-from ______ import _____
+import test.py
 
 class TestDomainDiscret(unittest.TestCase):
     def test_per_dist(self):

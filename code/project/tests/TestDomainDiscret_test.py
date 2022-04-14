@@ -1,4 +1,4 @@
-#BASIC CODE FOR CHECKING IF A .STL FILE IS ACTUALLY A .STL FILE
+#Unit Test for a .STL
 
 import unittest
 from project.tests import test
@@ -15,7 +15,3 @@ class TestDomainDiscret(unittest.TestCase):
         
 if __name__--'__main__':
     unittest.main()
-    
-#Think about
-# [OUTPUT FILE NAME].lower().endswith('.STL')
-# if statement

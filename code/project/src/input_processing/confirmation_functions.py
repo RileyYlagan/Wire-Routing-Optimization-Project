@@ -23,5 +23,5 @@ def confirm_xlsx(input_const_file):
 # a .txt file may be added !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 def confirm_const(input_const_file):
     myConst = str(input_const_file)
-    if myConst.lower().endswith('.xlsx') or myConst.lower().endswith('.csv'):
+    if myConst.lower().endswith('.xlsx') or myConst.lower().endswith('.csv') or myConst.lower().endswith('.xls'):
         return True

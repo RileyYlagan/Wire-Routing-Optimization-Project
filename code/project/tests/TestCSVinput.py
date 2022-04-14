@@ -1,4 +1,4 @@
-#BASIC CODE FOR CHECKING IF A .csv FILE IS ACTUALLY A .csv FILE
+#Unit test for a .csv
 
 import unittest
 
@@ -15,7 +15,3 @@ class TestDomainDiscret(unittest.TestCase):
         
 if __name__--'__main__':
     unittest.main()
-    
-#Think about
-# [OUTPUT FILE NAME].lower().endswith(('.csv', '.xlsx'))
-# if statement

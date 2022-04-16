@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="301d6028-f2a7-40a9-9c85-9301b8a5452e" name="Default Changelist" comment="" />
+    <list default="true" id="301d6028-f2a7-40a9-9c85-9301b8a5452e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../.venv/bin/python" beforeDir="false" afterPath="$PROJECT_DIR$/../../.venv/bin/python" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.venv/bin/python3" beforeDir="false" afterPath="$PROJECT_DIR$/../../.venv/bin/python3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.venv/lib64" beforeDir="false" afterPath="$PROJECT_DIR$/../../.venv/lib64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pathfinding/algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/pathfinding/algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pathfinding/valid_points.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/pathfinding/valid_points.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../requirements.txt" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +32,7 @@
   <component name="ProjectId" id="26wEq5284OrV6szu3X2jPGcu8tS" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/tests" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -204,6 +212,17 @@
       <updated>1648326435913</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

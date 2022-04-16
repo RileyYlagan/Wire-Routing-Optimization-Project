@@ -79,7 +79,34 @@ def astar(start, goal,node_dict):
         close_set.add(current)
         for x, y, z in neighbours:
             neighbour = x, y, z
-            tentative_g_score = gscore[current] + heuristic(current, neighbour)
+
+            r_max = 7 # 3.5355339059327378
+            Cost_r = 0
+
+            if current in came_from: # avoid error since it doesn't store the start node
+                #print(current) # current
+                #print(came_from[current]) # previous
+                #print(neighbor) # possible next
+
+                # Calculate r_c, the current radius of curvature, using the Menger curvature eqn:
+                a = heuristic(current, came_from[current])
+                b = heuristic(current, neighbour)
+                c = heuristic(neighbour, came_from[current])
+                p = 0.5 * (a + b + c) # half the perimeter
+                # Using heron's formula for area of a triangle
+                area = np.sqrt(p*(p-a)*(p-b)*(p-c))
+                r_c = 0 # stays 0 if the line is straight (not curving at all across the 3 points)
+                if area != 0:
+                    r_c = (a*b*c)/(4*area)
+
+                #print(r_c)
+
+                Cost_r = r_c - r_max # Cost function for curvature constraint
+
+                if Cost_r < 0: # if current radius is less than the max radius, don't add any cost
+                    Cost_r = 0
+
+            tentative_g_score = gscore[current] + heuristic(current, neighbour) + Cost_r
 
             if neighbour in close_set and tentative_g_score >= gscore.get(neighbour, 0):
                 continue

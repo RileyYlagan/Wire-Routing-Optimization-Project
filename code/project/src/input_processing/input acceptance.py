@@ -5,23 +5,11 @@ import pandas as pd
 from collections import OrderedDict
 import json
 import ast
-#Open the Dictionary
-with open("/Users/vlebovitz/Desktop/Wire Optimization Repo/Wire-Routing-Optimization-Project copy/code/project/src/input_processing/test_dictionary_for_SF5.txt") as json_file:
-    node_dict = json.load(json_file)
-#Read in separate datasheets
-xls = pd.ExcelFile('Wire Data Input.xlsx')
-df1 = pd.read_excel(xls, 'Excel Input')
-df2 = pd.read_excel(xls, 'Adjacency Matrix')
-
-
-
-
 
 
 #Implementation of Class Structuring with xls Structuring
 
-
-class wireClass:
+class wireClassDiagonal:
     def __init__(self,data,txtFile):
         self.xls = pd.ExcelFile(data)
         with open(txtFile) as json_file:
@@ -58,8 +46,8 @@ class wireClass:
             #print(iter)
             current = heapq.heappop(oheap)[1]
             current_node = [current[0],current[1],current[2]]
-            i = self.find_index_in_mesh(node_dict, current_node)
-            neighbours = node_dict[str(i)]['neighbors'] #available_neighbours(current[0],current[1],current[2])
+            i = self.find_index_in_mesh(self.node_dict, current_node)
+            neighbours = self.node_dict[str(i)]['neighbors'] #available_neighbours(current[0],current[1],current[2])
 
             if current == goal:
                 data = []
@@ -70,7 +58,34 @@ class wireClass:
             close_set.add(current)
             for x, y, z in neighbours:
                 neighbour = x, y, z
-                tentative_g_score = gscore[current] + self.heuristic(current, neighbour)
+
+                r_max = 7
+                Cost_r = 0
+
+                if current in came_from: # avoid error since it doesn't store the start node
+                    #print(current) # current
+                    #print(came_from[current]) # previous
+                    #print(neighbor) # possible next
+
+                    # Calculate r_c, the current radius of curvature, using the Menger curvature eqn:
+                    a = self.heuristic(current, came_from[current])
+                    b = self.heuristic(current, neighbour)
+                    c = self.heuristic(neighbour, came_from[current])
+                    p = 0.5 * (a + b + c) # half the perimeter
+                    # Using heron's formula for area of a triangle
+                    area = np.sqrt(p*(p-a)*(p-b)*(p-c))
+                    r_c = 0 # stays 0 if the line is straight (not curving at all across the 3 points)
+                    if area != 0:
+                        r_c = (a*b*c)/(4*area)
+
+                    #print(r_c)
+
+                    Cost_r = r_c - r_max # Cost function for curvature constraint
+
+                    if Cost_r < 0: # if current radius is less than the max radius, don't add any cost
+                        Cost_r = 0
+
+                tentative_g_score = gscore[current] + self.heuristic(current, neighbour) + Cost_r
 
                 if neighbour in close_set and tentative_g_score >= gscore.get(neighbour, 0):
                     continue
@@ -95,12 +110,12 @@ class wireClass:
             #print the route with its associated wire number
             print('Optimized Route Wire: '+ str(self.df1['Wire Number'][i]))
             print(route)
+            print(len(route))
             #STORE AS DICTIONARY key: wire number  value: a* route !!!        
               
 
-        
 #Instantiate Instance for Dataset
-a = wireClass('Wire Data Input.xlsx','test_dictionary_for_SF5.txt')
+a = wireClassDiagonal('Wire Data Input.xlsx','node_dic_SF5_diagonals.txt')
 
 #Process and Massage Data
 a.processData()

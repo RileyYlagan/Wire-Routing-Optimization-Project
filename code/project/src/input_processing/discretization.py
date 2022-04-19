@@ -167,7 +167,7 @@ def get_available_neighbors(current_node,valid_points,grid_points):
     index_x = int(np.where(x == current_node[0])[0])
     index_y = int(np.where(y == current_node[1])[0])
     index_z = int(np.where(z == current_node[2])[0])
-    # Get possible neighbors 
+    # Get possible neighbors #26 possible neighbors
     possible_neighbors = []
     # Straight Edges AND  Diagonal Edges
     # pos z
@@ -212,13 +212,21 @@ def get_available_neighbors(current_node,valid_points,grid_points):
     # holding xz
     if index_y+1 <= len(y) - 1:
         possible_neighbors.append([x[index_x],y[index_y+1],z[index_z]]) #19
+        if index_x+1 <= len(x) - 1:
+            possible_neighbors.append([x[index_x+1],y[index_y+1],z[index_z]]) #20
+        if index_x-1 >= 0:
+            possible_neighbors.append([x[index_x-1],y[index_y+1],z[index_z]]) #21
     if index_y-1 >= 0:
-        possible_neighbors.append([x[index_x],y[index_y-1],z[index_z]]) #20
+        possible_neighbors.append([x[index_x],y[index_y-1],z[index_z]]) #22
+        if index_x+1 <= len(x) - 1:
+            possible_neighbors.append([x[index_x+1],y[index_y-1],z[index_z]]) #23
+        if index_x-1 >= 0:
+            possible_neighbors.append([x[index_x-1],y[index_y-1],z[index_z]]) #24
     # holding yz
     if index_x+1 <= len(x) - 1:
-        possible_neighbors.append([x[index_x+1],y[index_y],z[index_z]]) #21
+        possible_neighbors.append([x[index_x+1],y[index_y],z[index_z]]) #25
     if index_x-1 >= 0:
-        possible_neighbors.append([x[index_x-1],y[index_y],z[index_z]]) #22
+        possible_neighbors.append([x[index_x-1],y[index_y],z[index_z]]) #26
 
     # Check if each possible node exists in the valid points list:
     # Have to coerce P from array to list

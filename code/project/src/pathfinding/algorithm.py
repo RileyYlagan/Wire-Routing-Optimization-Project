@@ -51,20 +51,14 @@ def find_index_in_mesh(node_dict, current_node):
     mesh_index = nodes.index(current_node)
     return mesh_index
 
-def astar(start, goal,node_dict):
+def astar(start, goal, node_dict):
     close_set = set() # closed list
     came_from = {} # parent node dict
     gscore = {start:0} # g-score dict
     fscore = {start:heuristic(start, goal)} #f score dict
     oheap = [] #open list
-    #print('fscore:')
-    #print(fscore)
     heapq.heappush(oheap, (fscore[start], start)) # put start node into open list
-    #print(oheap)
-    #iter = 0
     while oheap:
-        #iter += 1
-        #print(iter)
         current = heapq.heappop(oheap)[1]
         current_node = [current[0],current[1],current[2]]
         i = find_index_in_mesh(node_dict, current_node)
@@ -72,10 +66,16 @@ def astar(start, goal,node_dict):
 
         if current == goal:
             data = []
+            route_score = 0
             while current in came_from:
                 data.append(current)
                 current = came_from[current]
-            return data
+            data = data + [start]
+            data = data[::-1]
+            #for node in data:
+                #route_score = route_score fscore[node]
+            return data#, route_score
+
         close_set.add(current)
         for x, y, z in neighbours:
             neighbour = x, y, z
@@ -98,11 +98,14 @@ def astar(start, goal,node_dict):
 
 ##############################################################################
 
+def global_optimization():
+
+    
+    return 0
+
 # Functionize this
 def get_route(start,goal,node_dict):
     route = astar(start, goal,node_dict)
-    route = route + [start]
-    route = route[::-1]
 
     # Writes to file
     #a_file = open("test_astar.xyz","w")
@@ -139,7 +142,7 @@ def save_path_to_STL(route,filename):
     # Plot path as STL
     points = np.column_stack((x_coords, y_coords, z_coords))
 
-    spline = pv.Spline(points, 500).tube(radius=0.1)
+    spline = pv.Spline(points, 500).tube(radius=0.05)
     file = filename+".stl"
     spline.save(file)
 

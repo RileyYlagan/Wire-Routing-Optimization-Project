@@ -17,7 +17,7 @@ startTime = time.time()
 # STL name and SF will become user input
 print("Gathering Input...")
 input_time = time.time()
-input_file = '../../../data/open_maze.STL'
+input_file = '../../../data/open_maze.stl'
 my_mesh = mesh.Mesh.from_file(input_file)
 SF = 1
 grid = dz.construct_uniform_grid(my_mesh,SF)

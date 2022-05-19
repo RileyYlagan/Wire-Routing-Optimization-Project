@@ -1,0 +1,13 @@
+05-10 22:24 Gathering Input...
+05-10 22:24 Finished in 0.0015366077423095703 seconds
+05-10 22:24 Getting Valid Points...
+05-10 23:16 Finished in 3126.264992952347 seconds
+05-10 23:16 Getting Node Neighbors...
+05-10 23:17 Finished in 95.63153648376465 seconds
+05-10 23:17 Finding Optimal Route...
+05-10 23:28 Finished in 649.2415738105774 seconds
+05-10 23:28 Length of wire b is 258.47226
+05-10 23:28 Length of wire a is 344.33942
+05-10 23:28 Length of wire c is 215.00764
+05-10 23:28 Done
+05-10 23:28 Total Execution time in seconds: 3871.218383550644
